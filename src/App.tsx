@@ -27,10 +27,13 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center">
+      <div className="min-h-screen bg-agri-gradient bg-field-texture flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-green-200 border-t-green-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="relative w-16 h-16 mx-auto mb-4">
+            <span className="absolute inset-0 rounded-full border-4 border-agri-200 border-t-agri-600 animate-spin"></span>
+            <span className="absolute inset-2 rounded-full border-4 border-crop-100 border-t-crop-500 animate-spin [animation-duration:1.2s]"></span>
+          </div>
+          <p className="text-soil-700">Loading...</p>
         </div>
       </div>
     );
@@ -52,7 +55,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-agri-gradient bg-field-texture">
       <Header
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
