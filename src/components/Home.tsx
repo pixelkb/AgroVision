@@ -22,7 +22,7 @@ export default function Home({ setCurrentPage }: HomeProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-agri-50 via-white to-sky-50">
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 agri-hero-bg rounded-b-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8 agri-hero-bg rounded-b-2xl">
         <div className="text-center">
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-agri-100 text-agri-700 text-xs font-medium mb-4">
             <Sun className="w-3.5 h-3.5 mr-1" /> Smart Crop Health Assistant

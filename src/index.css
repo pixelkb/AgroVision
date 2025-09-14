@@ -22,7 +22,7 @@
 @layer utilities {
   .agri-hero-bg {
     @apply bg-agri-hero bg-blend-multiply;
-    background-size: cover, 600px;
+    background-size: cover, cover;
     background-position: center;
   }
 

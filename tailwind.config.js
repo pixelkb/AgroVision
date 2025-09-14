@@ -58,7 +58,7 @@ export default {
         sans: ['Inter', 'system-ui', 'ui-sans-serif', 'sans-serif']
       },
       backgroundImage: {
-        'agri-hero': 'linear-gradient(180deg, rgba(105,184,36,0.10) 0%, rgba(79,149,26,0.10) 40%, rgba(28,77,21,0.10) 100%), url("/agri-texture.svg")',
+        'agri-hero': 'linear-gradient(180deg, rgba(105,184,36,0.18) 0%, rgba(79,149,26,0.22) 40%, rgba(28,77,21,0.28) 100%), url("https://www.apacoutlookmag.com/media/Agriculture-Sensor-Technology-Ritam-Gandhi.png")',
         'agri-grid': 'radial-gradient(circle at 1px 1px, rgba(65,155,101,0.15) 1px, transparent 0)',
       },
       backgroundSize: {
