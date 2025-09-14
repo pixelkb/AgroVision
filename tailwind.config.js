@@ -46,7 +46,8 @@ export default {
         }
       },
       boxShadow: {
-        leaf: '0 10px 25px -5px rgba(46,145,70,0.2), 0 8px 10px -6px rgba(46,145,70,0.15)'
+        leaf: '0 10px 25px -5px rgba(46,145,70,0.2), 0 8px 10px -6px rgba(46,145,70,0.15)',
+        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)'
       },
       backgroundImage: {
         'agri-gradient': 'linear-gradient(135deg, #e5f5e7 0%, #fff 30%, #e5f0ff 100%)',
