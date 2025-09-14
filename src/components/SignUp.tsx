@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Loader2, Leaf } from 'lucide-react';
+import FarmIllustration from './FarmIllustration';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -11,12 +12,18 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
   const { t, language, setLanguage } = useLanguage();
   const { signup, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    password: string;
+    language: 'en' | 'hi';
+  }>({
     name: '',
     email: '',
     phone: '',
     password: '',
-    language: language
+    language: language as 'en' | 'hi'
   });
   const [error, setError] = useState('');
 
@@ -46,21 +53,22 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-transparent flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-16 h-16 bg-gradient-to-br from-agri-500 to-agri-600 rounded-2xl flex items-center justify-center shadow-leaf">
               <Leaf className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900 font-display">
             {t('auth.signup.title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-soil-700">
             {t('auth.signup.subtitle')}
           </p>
         </div>
+        <FarmIllustration />
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
@@ -81,7 +89,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
                 placeholder="John Doe"
               />
             </div>
@@ -97,7 +105,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
                 placeholder="john@example.com"
               />
             </div>
@@ -112,7 +120,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
                 placeholder="+91 98765 43210"
               />
             </div>
@@ -129,7 +137,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="appearance-none relative block w-full px-3 py-3 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-3 pr-10 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
                   placeholder="••••••••"
                 />
                 <button
@@ -154,8 +162,8 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                 id="language"
                 name="language"
                 value={formData.language}
-                onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
+                onChange={(e) => setFormData({ ...formData, language: e.target.value as 'en' | 'hi' })}
+                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
               >
                 <option value="en">{t('auth.english')}</option>
                 <option value="hi">{t('auth.hindi')}</option>
@@ -167,7 +175,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-agri-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-leaf"
             >
               {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -181,7 +189,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
             <button
               type="button"
               onClick={() => setCurrentPage('login')}
-              className="text-sm text-green-600 hover:text-green-500 transition-colors"
+              className="text-sm text-agri-700 hover:text-agri-600 transition-colors"
             >
               {t('auth.login.link')}
             </button>

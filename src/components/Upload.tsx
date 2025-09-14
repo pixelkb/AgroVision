@@ -101,13 +101,13 @@ export default function Upload({ setCurrentPage }: UploadProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 py-12">
+    <div className="min-h-screen bg-transparent py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">
             {t('upload.title')}
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-soil-700">
             {t('upload.subtitle')}
           </p>
         </div>
@@ -118,21 +118,21 @@ export default function Upload({ setCurrentPage }: UploadProps) {
               <div
                 className={`border-2 border-dashed rounded-2xl p-8 md:p-12 text-center transition-colors ${
                   dragOver
-                    ? 'border-green-500 bg-green-50'
-                    : 'border-gray-300 hover:border-green-400'
+                    ? 'border-agri-500 bg-agri-50'
+                    : 'border-agri-200 hover:border-agri-400'
                 }`}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
               >
-                <UploadIcon className="w-16 h-16 text-gray-400 mx-auto mb-6" />
-                <p className="text-lg text-gray-600 mb-4">
+                <UploadIcon className="w-16 h-16 text-agri-700 mx-auto mb-6" />
+                <p className="text-lg text-soil-700 mb-4">
                   {t('upload.dragdrop')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-agri-200 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-agri-50 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors"
                   >
                     <UploadIcon className="w-4 h-4 mr-2" />
                     {t('upload.browse')}
@@ -140,13 +140,13 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   <span className="text-gray-500">or</span>
                   <button
                     onClick={() => cameraInputRef.current?.click()}
-                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors shadow-leaf"
                   >
                     <Camera className="w-4 h-4 mr-2" />
                     {t('upload.camera')}
                   </button>
                 </div>
-                <p className="text-sm text-gray-500 mt-4">
+                <p className="text-sm text-soil-700 mt-4">
                   {t('upload.supported')}
                 </p>
               </div>
@@ -156,11 +156,11 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   <img
                     src={imagePreview}
                     alt="Selected plant"
-                    className="w-full h-64 md:h-96 object-contain bg-gray-50 rounded-xl border"
+                    className="w-full h-64 md:h-96 object-contain bg-agri-50 rounded-xl border border-agri-200"
                   />
                   <button
                     onClick={handleReset}
-                    className="absolute top-2 right-2 p-2 bg-gray-800 bg-opacity-75 text-white rounded-full hover:bg-opacity-100 transition-opacity"
+                    className="absolute top-2 right-2 p-2 bg-agri-700 text-white rounded-full hover:bg-agri-800 transition-colors"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -170,7 +170,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   <button
                     onClick={handleAnalyze}
                     disabled={isAnalyzing}
-                    className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-agri-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-leaf hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                   >
                     {isAnalyzing ? (
                       <>
@@ -191,7 +191,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
         ) : (
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <div className="text-center mb-8">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="w-16 h-16 text-agri-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 {t('upload.results.title')}
               </h2>
@@ -202,14 +202,14 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                 <img
                   src={imagePreview!}
                   alt="Analyzed plant"
-                  className="w-full h-64 object-contain bg-gray-50 rounded-xl border"
+                  className="w-full h-64 object-contain bg-agri-50 rounded-xl border border-agri-200"
                 />
               </div>
               
               <div className="space-y-6">
-                <div className="bg-gray-50 rounded-xl p-6">
+                <div className="bg-agri-50 rounded-xl p-6 border border-agri-100">
                   <div className="flex items-center mb-4">
-                    <AlertCircle className="w-5 h-5 text-orange-500 mr-2" />
+                    <AlertCircle className="w-5 h-5 text-crop-600 mr-2" />
                     <h3 className="text-lg font-semibold text-gray-900">
                       {t('upload.results.disease')}
                     </h3>
@@ -221,9 +221,9 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                     <span className="text-sm text-gray-600 mr-2">
                       {t('upload.results.confidence')}:
                     </span>
-                    <div className="flex-1 bg-gray-200 rounded-full h-2 mr-2">
+                    <div className="flex-1 bg-agri-100 rounded-full h-2 mr-2">
                       <div
-                        className="bg-green-500 h-2 rounded-full transition-all duration-500"
+                        className="bg-agri-600 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${result.confidence}%` }}
                       ></div>
                     </div>
@@ -233,11 +233,11 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   </div>
                 </div>
 
-                <div className="bg-green-50 rounded-xl p-6">
+                <div className="bg-agri-50 rounded-xl p-6 border border-agri-100">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     {t('upload.results.treatment')}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-soil-700 leading-relaxed">
                     {result.treatment}
                   </p>
                 </div>
@@ -245,7 +245,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                 <div className="text-center">
                   <button
                     onClick={handleReset}
-                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-agri-200 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-agri-50 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors"
                   >
                     <UploadIcon className="w-4 h-4 mr-2" />
                     {t('upload.results.retry')}

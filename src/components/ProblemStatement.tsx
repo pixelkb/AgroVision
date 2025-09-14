@@ -10,13 +10,13 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 py-12">
+    <div className="min-h-screen bg-transparent py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-display">
             {t('problem.title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-soil-700 max-w-3xl mx-auto">
             {t('problem.subtitle')}
           </p>
         </div>
@@ -24,9 +24,9 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
         {/* Introduction */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
           <div className="flex items-start mb-6">
-            <AlertTriangle className="w-8 h-8 text-red-500 mt-1 mr-4" />
+            <AlertTriangle className="w-8 h-8 text-crop-600 mt-1 mr-4" />
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">The Global Challenge</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 font-display">The Global Challenge</h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 {t('problem.intro')}
               </p>
@@ -37,9 +37,9 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
         {/* Problem Sections */}
         <div className="space-y-8">
           {/* Scale of Problem */}
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl shadow-lg p-8">
+          <div className="bg-gradient-to-r from-agri-50 via-crop-50 to-agri-100 rounded-2xl shadow-lg p-8 border border-agri-100">
             <div className="flex items-start mb-6">
-              <TrendingDown className="w-8 h-8 text-red-600 mt-1 mr-4" />
+              <TrendingDown className="w-8 h-8 text-agri-700 mt-1 mr-4" />
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   {t('problem.section1.title')}
@@ -50,21 +50,21 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-3xl font-bold text-red-600 mb-2">35%+</div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-agri-100">
+                <div className="text-3xl font-bold text-agri-700 mb-2">35%+</div>
                 <p className="text-gray-700">Crop yield destroyed in India annually</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-3xl font-bold text-orange-600 mb-2">Manual</div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-agri-100">
+                <div className="text-3xl font-bold text-crop-700 mb-2">Manual</div>
                 <p className="text-gray-700">Subjective and error-prone inspections</p>
               </div>
             </div>
           </div>
 
           {/* Nutrient Deficiency */}
-          <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl shadow-lg p-8">
+          <div className="bg-gradient-to-r from-crop-50 to-agri-100 rounded-2xl shadow-lg p-8 border border-agri-100">
             <div className="flex items-start mb-6">
-              <Microscope className="w-8 h-8 text-yellow-600 mt-1 mr-4" />
+              <Microscope className="w-8 h-8 text-crop-700 mt-1 mr-4" />
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   {t('problem.section2.title')}
@@ -76,8 +76,8 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
             </div>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
               {['N', 'P', 'K', 'Ca', 'Fe'].map((nutrient) => (
-                <div key={nutrient} className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-2xl font-bold text-yellow-600 mb-1">{nutrient}</div>
+                <div key={nutrient} className="bg-white rounded-xl p-4 text-center shadow-sm border border-agri-100">
+                  <div className="text-2xl font-bold text-crop-700 mb-1">{nutrient}</div>
                   <p className="text-sm text-gray-700">Critical</p>
                 </div>
               ))}
@@ -85,7 +85,7 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
           </div>
 
           {/* Traditional Methods */}
-          <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl shadow-lg p-8">
+          <div className="bg-gradient-to-r from-gray-50 to-agri-100 rounded-2xl shadow-lg p-8 border border-agri-100">
             <div className="flex items-start mb-6">
               <Users className="w-8 h-8 text-gray-600 mt-1 mr-4" />
               <div>
@@ -98,15 +98,15 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
               </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
                 <div className="text-2xl font-bold text-gray-600 mb-2">💰</div>
                 <p className="text-gray-700">Expensive laboratory tests</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
                 <div className="text-2xl font-bold text-gray-600 mb-2">⏱️</div>
                 <p className="text-gray-700">Time-consuming processes</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
                 <div className="text-2xl font-bold text-gray-600 mb-2">🚫</div>
                 <p className="text-gray-700">Impractical for small farmers</p>
               </div>
@@ -114,9 +114,9 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
           </div>
 
           {/* AI Solution */}
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl shadow-lg p-8">
+          <div className="bg-gradient-to-r from-agri-50 to-crop-50 rounded-2xl shadow-lg p-8 border border-agri-100">
             <div className="flex items-start mb-6">
-              <Brain className="w-8 h-8 text-green-600 mt-1 mr-4" />
+              <Brain className="w-8 h-8 text-agri-700 mt-1 mr-4" />
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   {t('problem.section4.title')}
@@ -127,46 +127,46 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-3xl font-bold text-green-600 mb-2">90%+</div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-agri-100">
+                <div className="text-3xl font-bold text-agri-700 mb-2">90%+</div>
                 <p className="text-gray-700">AI model accuracy in disease detection</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-3xl font-bold text-blue-600 mb-2">CNN</div>
+              <div className="bg-white rounded-xl p-6 shadow-sm border border-agri-100">
+                <div className="text-3xl font-bold text-agri-700 mb-2">CNN</div>
                 <p className="text-gray-700">Advanced deep learning models</p>
               </div>
             </div>
           </div>
 
           {/* Our Solution */}
-          <div className="bg-gradient-to-r from-purple-50 to-green-50 rounded-2xl shadow-lg p-8">
+          <div className="bg-gradient-to-r from-crop-50 to-agri-100 rounded-2xl shadow-lg p-8 border border-agri-100">
             <div className="flex items-start mb-6">
-              <Smartphone className="w-8 h-8 text-purple-600 mt-1 mr-4" />
+              <Smartphone className="w-8 h-8 text-agri-700 mt-1 mr-4" />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Proposed Solution</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 font-display">Our Proposed Solution</h2>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {t('problem.conclusion')}
                 </p>
               </div>
             </div>
             <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Brain className="w-6 h-6 text-green-600" />
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
+                <div className="w-12 h-12 bg-agri-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Brain className="w-6 h-6 text-agri-700" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">GenAI-Based</h3>
                 <p className="text-sm text-gray-700">Advanced AI models for accurate detection</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Smartphone className="w-6 h-6 text-blue-600" />
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
+                <div className="w-12 h-12 bg-crop-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Smartphone className="w-6 h-6 text-crop-700" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Mobile-First</h3>
                 <p className="text-sm text-gray-700">Lightweight web and mobile application</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <AlertTriangle className="w-6 h-6 text-purple-600" />
+              <div className="bg-white rounded-xl p-6 shadow-sm text-center border border-agri-100">
+                <div className="w-12 h-12 bg-agri-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <AlertTriangle className="w-6 h-6 text-agri-700" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Real-Time</h3>
                 <p className="text-sm text-gray-700">Instant diagnosis from leaf images</p>
@@ -179,7 +179,7 @@ export default function ProblemStatement({ setCurrentPage }: ProblemStatementPro
         <div className="text-center mt-12">
           <button
             onClick={() => setCurrentPage('home')}
-            className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+            className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-agri-500 shadow-leaf hover:shadow-xl transform hover:scale-105 transition-all duration-200"
           >
             Experience the Solution
           </button>

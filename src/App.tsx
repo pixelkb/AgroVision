@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header';
+import AgricultureBackground from './components/AgricultureBackground';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
@@ -55,7 +56,8 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-agri-gradient bg-field-texture">
+    <div className="min-h-screen bg-agri-gradient bg-field-texture relative">
+      <AgricultureBackground />
       <Header
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
