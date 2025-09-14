@@ -30,17 +30,18 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100">
+    <header className="bg-white/80 backdrop-blur border-b border-agri-100">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2L13.09 8.26L19 7L14.74 12.74L21 12.74L13.09 15.74L12 22L10.91 15.74L3 12.74L9.26 12.74L5 7L10.91 8.26L12 2Z"/>
+              <div className="w-8 h-8 bg-gradient-to-br from-agri-500 to-agri-600 rounded-lg flex items-center justify-center shadow-leaf">
+                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3C16 6 19 9 19 13C19 16.866 15.866 20 12 20C8.13401 20 5 16.866 5 13C5 9 8 6 12 3Z" fill="currentColor"/>
+                  <path d="M12 3C9.5 8 9.5 12 12 16C14.5 12 14.5 8 12 3Z" fill="#E09F3E"/>
                 </svg>
               </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">AgroVision</span>
+              <span className="ml-2 text-xl font-bold text-gray-900 font-display">AgroVision</span>
             </div>
           </div>
 
@@ -52,7 +53,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                 onClick={() => setCurrentPage(item.id)}
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
                   currentPage === item.id
-                    ? 'text-green-600 border-b-2 border-green-600'
+                    ? 'text-agri-700 border-b-2 border-agri-600'
                     : 'text-gray-500 hover:text-gray-900'
                 }`}
               >
@@ -77,7 +78,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center space-x-1 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+                    className="flex items-center space-x-1 text-sm font-medium text-gray-500 hover:text-agri-700 transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>{t('nav.logout')}</span>
@@ -93,7 +94,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   </button>
                   <button
                     onClick={() => setCurrentPage('signup')}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    className="bg-agri-600 hover:bg-agri-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-leaf"
                   >
                     {t('nav.signup')}
                   </button>
@@ -113,7 +114,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-500 hover:text-gray-900"
+              className="text-gray-500 hover:text-agri-700"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -133,7 +134,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   }}
                   className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors ${
                     currentPage === item.id
-                      ? 'text-green-600 bg-green-50'
+                      ? 'text-agri-700 bg-agri-50'
                       : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
@@ -149,7 +150,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center space-x-2 w-full text-left px-3 py-2 text-base font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+                    className="flex items-center space-x-2 w-full text-left px-3 py-2 text-base font-medium text-gray-500 hover:text-agri-700 hover:bg-agri-50"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>{t('nav.logout')}</span>
@@ -171,7 +172,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                       setCurrentPage('signup');
                       setMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left px-3 py-2 text-base font-medium bg-green-600 hover:bg-green-700 text-white rounded-lg"
+                    className="block w-full text-left px-3 py-2 text-base font-medium bg-agri-600 hover:bg-agri-700 text-white rounded-lg shadow-leaf"
                   >
                     {t('nav.signup')}
                   </button>

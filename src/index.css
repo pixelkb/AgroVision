@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Apply agriculture fonts */
+html {
+  font-family: theme('fontFamily.body');
+}
+
+h1, h2, h3, .font-display {
+  font-family: theme('fontFamily.display');
+}
+
+/* Subtle background texture utility */
+.bg-field-texture {
+  background-image: theme('backgroundImage.field-texture');
+}
