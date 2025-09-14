@@ -47,11 +47,15 @@ export default {
       },
       boxShadow: {
         leaf: '0 10px 25px -5px rgba(46,145,70,0.2), 0 8px 10px -6px rgba(46,145,70,0.15)',
-        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)'
+        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.25)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
       },
       backgroundImage: {
         'agri-gradient': 'linear-gradient(135deg, #e5f5e7 0%, #fff 30%, #e5f0ff 100%)',
         'field-texture': 'radial-gradient(circle at 20% 20%, rgba(70,176,92,0.08) 0, transparent 40%), radial-gradient(circle at 80% 0%, rgba(224,159,62,0.08) 0, transparent 40%)'
+      },
+      borderWidth: {
+        '3': '3px'
       }
     },
   },

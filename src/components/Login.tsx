@@ -36,32 +36,32 @@ export default function Login({ setCurrentPage }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-agri-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-gray-200/50 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:border-agri-300/60">
+    <div className="min-h-screen bg-gradient-to-br from-agri-50 via-white to-blue-50 flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 hover:py-12 transition-all duration-500">
+      <div className="max-w-lg w-full space-y-10 bg-white/90 backdrop-blur-md rounded-3xl p-10 border-2 border-gray-200/50 shadow-2xl hover:shadow-3xl hover:border-agri-300 transform hover:scale-105 transition-all duration-500">
         <div className="text-center">
           <div className="flex justify-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-agri-500 to-agri-600 rounded-2xl flex items-center justify-center shadow-leaf hover:shadow-xl transform hover:scale-110 transition-all duration-300">
-              <Leaf className="w-8 h-8 text-white" />
+            <div className="w-20 h-20 bg-gradient-to-br from-agri-500 to-agri-600 rounded-3xl flex items-center justify-center shadow-leaf hover:shadow-2xl transform hover:scale-110 transition-all duration-300">
+              <Leaf className="w-10 h-10 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900 font-display tracking-tight">
+          <h2 className="mt-8 text-4xl md:text-5xl font-bold text-gray-900 font-display tracking-tight hover:text-agri-700 transition-colors duration-300">
             {t('auth.login.title')}
           </h2>
-          <p className="mt-2 text-sm text-soil-600 font-medium">
+          <p className="mt-4 text-lg text-soil-600 font-medium hover:text-soil-700 transition-colors duration-300">
             {t('auth.login.subtitle')}
           </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-medium animate-pulse">
+            <div className="bg-red-50/80 backdrop-blur-sm border-2 border-red-200 text-red-600 px-6 py-4 rounded-2xl text-base font-medium animate-pulse hover:bg-red-100 transition-colors duration-300">
               {error}
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-soil-700 mb-2 font-display">
+              <label htmlFor="email" className="block text-lg font-bold text-soil-700 mb-3 font-display hover:text-agri-700 transition-colors duration-300">
                 {t('auth.email')}
               </label>
               <input
@@ -71,13 +71,13 @@ export default function Login({ setCurrentPage }: LoginProps) {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="appearance-none relative block w-full px-4 py-3 border-2 border-gray-200 placeholder-soil-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 hover:border-agri-300 transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm"
+                className="appearance-none relative block w-full px-6 py-4 border-2 border-gray-200 placeholder-soil-400 text-lg text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-agri-300 focus:border-agri-500 hover:border-agri-400 hover:bg-white transition-all duration-300 font-medium bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md"
                 placeholder="john@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-soil-700 mb-2 font-display">
+              <label htmlFor="password" className="block text-lg font-bold text-soil-700 mb-3 font-display hover:text-agri-700 transition-colors duration-300">
                 {t('auth.password')}
               </label>
               <div className="relative">
@@ -88,18 +88,18 @@ export default function Login({ setCurrentPage }: LoginProps) {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="appearance-none relative block w-full px-4 py-3 pr-12 border-2 border-gray-200 placeholder-soil-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 hover:border-agri-300 transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm"
+                  className="appearance-none relative block w-full px-6 py-4 pr-14 border-2 border-gray-200 placeholder-soil-400 text-lg text-gray-900 rounded-2xl focus:outline-none focus:ring-4 focus:ring-agri-300 focus:border-agri-500 hover:border-agri-400 hover:bg-white transition-all duration-300 font-medium bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center hover:text-agri-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 pr-5 flex items-center hover:text-agri-600 hover:scale-110 transition-all duration-300"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-soil-400" />
+                    <EyeOff className="h-6 w-6 text-soil-400" />
                   ) : (
-                    <Eye className="h-5 w-5 text-soil-400" />
+                    <Eye className="h-6 w-6 text-soil-400" />
                   )}
                 </button>
               </div>
@@ -110,10 +110,10 @@ export default function Login({ setCurrentPage }: LoginProps) {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-4 px-6 border-2 border-transparent text-base font-bold rounded-xl text-white bg-gradient-to-r from-agri-600 to-agri-700 hover:from-agri-700 hover:to-agri-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-agri-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 hover:shadow-leaf font-display"
+              className="group relative w-full flex justify-center py-5 px-8 border-2 border-transparent text-xl font-bold rounded-2xl text-white bg-gradient-to-r from-agri-600 to-agri-700 hover:from-agri-700 hover:to-agri-800 focus:outline-none focus:ring-4 focus:ring-agri-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 hover:shadow-2xl font-display shadow-lg"
             >
               {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-6 h-6 animate-spin" />
               ) : (
                 t('auth.login.button')
               )}
@@ -124,7 +124,7 @@ export default function Login({ setCurrentPage }: LoginProps) {
             <button
               type="button"
               onClick={() => setCurrentPage('signup')}
-              className="text-sm font-semibold text-agri-600 hover:text-agri-700 transition-all duration-200 hover:underline decoration-2 underline-offset-4 font-display"
+              className="text-lg font-bold text-agri-600 hover:text-agri-700 transition-all duration-300 hover:underline decoration-2 underline-offset-4 font-display hover:scale-105 transform"
             >
               {t('auth.signup.link')}
             </button>
