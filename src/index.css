@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --agri-primary: 47 126 80; /* tailwind agri-600 */
+    --agri-accent: 105 184 36; /* crop-500 */
+    --agri-sky: 76 160 245; /* sky-500 */
+    --soil: 166 107 51; /* soil-500 */
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-agri-50 text-gray-900 font-sans;
+  }
+}
+
+@layer utilities {
+  .agri-hero-bg {
+    @apply bg-agri-hero bg-blend-multiply;
+    background-size: cover, 600px;
+    background-position: center;
+  }
+
+  .agri-grid-bg {
+    @apply bg-agri-grid;
+    background-size: var(--grid-size, 16px) var(--grid-size, 16px);
+  }
+
+  .btn-agri {
+    @apply inline-flex items-center justify-center rounded-xl font-medium text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-agri-500 transition-colors;
+  }
+}

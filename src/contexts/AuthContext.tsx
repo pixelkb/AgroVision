@@ -38,17 +38,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // For demo purposes, check if user exists in localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const existingUser = users.find((u: any) => u.email === email && u.password === password);
+      const users: Array<User & { password: string }> = JSON.parse(localStorage.getItem('users') || '[]');
+      const existingUser = users.find((storedUser) => storedUser.email === email && storedUser.password === password);
       
       if (existingUser) {
-        const { password: _, ...userWithoutPassword } = existingUser;
-        setUser(userWithoutPassword);
-        localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+        const sanitizedUser: User = {
+          id: existingUser.id,
+          name: existingUser.name,
+          email: existingUser.email,
+          phone: existingUser.phone,
+          preferredLanguage: existingUser.preferredLanguage,
+        };
+        setUser(sanitizedUser);
+        localStorage.setItem('user', JSON.stringify(sanitizedUser));
         return true;
       }
       return false;
-    } catch (error) {
+    } catch {
       return false;
     } finally {
       setIsLoading(false);
@@ -61,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const newUser = {
+      const newUser: User & { password: string } = {
         id: Date.now().toString(),
         name,
         email,
@@ -71,10 +77,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       };
 
       // Save to localStorage (in a real app, this would be sent to the backend)
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const users: Array<User & { password: string }> = JSON.parse(localStorage.getItem('users') || '[]');
       
       // Check if user already exists
-      if (users.find((u: any) => u.email === email)) {
+      if (users.some((storedUser) => storedUser.email === email)) {
         return false;
       }
       
@@ -82,12 +88,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('users', JSON.stringify(users));
       
       // Set current user (without password)
-      const { password: _, ...userWithoutPassword } = newUser;
-      setUser(userWithoutPassword);
-      localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+      const sanitizedUser: User = {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+        preferredLanguage: newUser.preferredLanguage,
+      };
+      setUser(sanitizedUser);
+      localStorage.setItem('user', JSON.stringify(sanitizedUser));
       
       return true;
-    } catch (error) {
+    } catch {
       return false;
     } finally {
       setIsLoading(false);

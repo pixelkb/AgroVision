@@ -2,17 +2,13 @@ import React, { useState, useRef } from 'react';
 import { Upload as UploadIcon, Camera, X, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-interface UploadProps {
-  setCurrentPage: (page: string) => void;
-}
-
 interface PredictionResult {
   disease: string;
   confidence: number;
   treatment: string;
 }
 
-export default function Upload({ setCurrentPage }: UploadProps) {
+export default function Upload() {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -101,7 +97,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-agri-50 via-white to-sky-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -118,8 +114,8 @@ export default function Upload({ setCurrentPage }: UploadProps) {
               <div
                 className={`border-2 border-dashed rounded-2xl p-8 md:p-12 text-center transition-colors ${
                   dragOver
-                    ? 'border-green-500 bg-green-50'
-                    : 'border-gray-300 hover:border-green-400'
+                    ? 'border-agri-500 bg-agri-50'
+                    : 'border-gray-300 hover:border-agri-400'
                 }`}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
@@ -132,7 +128,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors"
                   >
                     <UploadIcon className="w-4 h-4 mr-2" />
                     {t('upload.browse')}
@@ -140,7 +136,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   <span className="text-gray-500">or</span>
                   <button
                     onClick={() => cameraInputRef.current?.click()}
-                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors"
                   >
                     <Camera className="w-4 h-4 mr-2" />
                     {t('upload.camera')}
@@ -170,7 +166,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   <button
                     onClick={handleAnalyze}
                     disabled={isAnalyzing}
-                    className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                    className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-agri-600 hover:bg-agri-700 focus:outline-none focus:ring-2 focus:ring-agri-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                   >
                     {isAnalyzing ? (
                       <>
@@ -191,7 +187,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
         ) : (
           <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
             <div className="text-center mb-8">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="w-16 h-16 text-agri-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 {t('upload.results.title')}
               </h2>
@@ -223,7 +219,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                     </span>
                     <div className="flex-1 bg-gray-200 rounded-full h-2 mr-2">
                       <div
-                        className="bg-green-500 h-2 rounded-full transition-all duration-500"
+                        className="bg-agri-600 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${result.confidence}%` }}
                       ></div>
                     </div>
@@ -233,7 +229,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                   </div>
                 </div>
 
-                <div className="bg-green-50 rounded-xl p-6">
+                <div className="bg-agri-50 rounded-xl p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     {t('upload.results.treatment')}
                   </h3>
@@ -245,7 +241,7 @@ export default function Upload({ setCurrentPage }: UploadProps) {
                 <div className="text-center">
                   <button
                     onClick={handleReset}
-                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+                    className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-agri-500 transition-colors"
                   >
                     <UploadIcon className="w-4 h-4 mr-2" />
                     {t('upload.results.retry')}

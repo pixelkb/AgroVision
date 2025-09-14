@@ -43,7 +43,7 @@ function AppContent() {
       case 'login':
         return user ? <Home setCurrentPage={setCurrentPage} /> : <Login setCurrentPage={setCurrentPage} />;
       case 'upload':
-        return user ? <Upload setCurrentPage={setCurrentPage} /> : <Login setCurrentPage={setCurrentPage} />;
+        return user ? <Upload /> : <Login setCurrentPage={setCurrentPage} />;
       case 'problem':
         return <ProblemStatement setCurrentPage={setCurrentPage} />;
       default:
