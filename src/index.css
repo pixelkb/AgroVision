@@ -15,3 +15,24 @@ h1, h2, h3, .font-display {
 .bg-field-texture {
   background-image: theme('backgroundImage.field-texture');
 }
+
+/* Creative agriculture background animations */
+@keyframes agriSunPulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.04); }
+}
+.agri-sun { animation: agriSunPulse 7s ease-in-out infinite; }
+
+@keyframes agriCloudDrift {
+  0% { transform: translateX(-20%); }
+  100% { transform: translateX(120%); }
+}
+.agri-cloud { animation: agriCloudDrift 55s linear infinite; }
+.agri-cloud.slower { animation-duration: 85s; }
+.agri-cloud.faster { animation-duration: 40s; }
+
+@keyframes agriFieldSway {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+.agri-field { animation: agriFieldSway 8s ease-in-out infinite; }
