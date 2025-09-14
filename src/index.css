@@ -36,3 +36,9 @@ h1, h2, h3, .font-display {
   50% { transform: translateY(4px); }
 }
 .agri-field { animation: agriFieldSway 8s ease-in-out infinite; }
+
+/* Windmill rotor animation */
+@keyframes rotorSpin {
+  to { transform: rotate(360deg); }
+}
+.wind-rotor { animation: rotorSpin 12s linear infinite; }

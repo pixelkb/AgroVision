@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Loader2, Leaf } from 'lucide-react';
+import FarmIllustration from './FarmIllustration';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -67,6 +68,7 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
             {t('auth.signup.subtitle')}
           </p>
         </div>
+        <FarmIllustration />
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
