@@ -1,5 +1,5 @@
-import React from 'react';
-import { Menu, X, Globe, LogOut, User } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Menu, X, Globe, LogOut, User, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -11,8 +11,41 @@ interface HeaderProps {
 }
 
 export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, setMobileMenuOpen }: HeaderProps) {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t, getLanguageName } = useLanguage();
   const { user, logout } = useAuth();
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const langMenuRef = useRef<HTMLDivElement>(null);
+
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'hi', name: 'हिंदी (Hindi)' },
+    { code: 'es', name: 'Español (Spanish)' },
+    { code: 'fr', name: 'Français (French)' },
+    { code: 'de', name: 'Deutsch (German)' },
+    { code: 'pt', name: 'Português (Portuguese)' },
+    { code: 'bn', name: 'বাংলা (Bengali)' },
+    { code: 'ta', name: 'தமிழ் (Tamil)' },
+    { code: 'te', name: 'తెలుగు (Telugu)' },
+    { code: 'mr', name: 'मराठी (Marathi)' },
+    { code: 'pa', name: 'ਪੰਜਾਬੀ (Punjabi)' },
+    { code: 'gu', name: 'ગુજરાતી (Gujarati)' }
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode as any);
+    setLangMenuOpen(false);
+  };
 
   const navigation = user ? [
     { name: t('nav.home'), id: 'home' },
@@ -62,13 +95,39 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
             ))}
             
             <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
-                className="flex items-center space-x-1 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
-              >
-                <Globe className="w-4 h-4" />
-                <span>{language === 'en' ? 'हिं' : 'EN'}</span>
-              </button>
+              <div className="relative" ref={langMenuRef}>
+                <button
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-agri-700 bg-gray-50 hover:bg-agri-50 rounded-lg transition-all"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="hidden lg:inline">{getLanguageName(language as any)}</span>
+                  <span className="lg:hidden">{language.toUpperCase()}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${langMenuOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {langMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50 max-h-96 overflow-y-auto">
+                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
+                      Select Language
+                    </div>
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className={`w-full text-left px-4 py-2.5 text-sm hover:bg-agri-50 transition-colors flex items-center justify-between ${
+                          language === lang.code ? 'bg-agri-50 text-agri-700 font-medium' : 'text-gray-700'
+                        }`}
+                      >
+                        <span>{lang.name}</span>
+                        {language === lang.code && (
+                          <span className="text-agri-600">✓</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {user ? (
                 <div className="flex items-center space-x-2">
@@ -104,13 +163,13 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
+          <div className="md:hidden flex items-center space-x-2">
             <button
-              onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
-              className="flex items-center space-x-1 text-sm font-medium text-gray-500 hover:text-gray-900"
+              onClick={() => setLangMenuOpen(!langMenuOpen)}
+              className="flex items-center space-x-1 px-2 py-1 text-sm font-medium text-gray-700 hover:text-agri-700 bg-gray-50 rounded-lg"
             >
               <Globe className="w-4 h-4" />
-              <span>{language === 'en' ? 'हिं' : 'EN'}</span>
+              <span>{language.toUpperCase()}</span>
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -141,7 +200,7 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   {item.name}
                 </button>
               ))}
-              
+
               {user ? (
                 <div className="border-t border-gray-100 pt-2">
                   <div className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-700">
@@ -176,6 +235,33 @@ export default function Header({ currentPage, setCurrentPage, mobileMenuOpen, se
                   >
                     {t('nav.signup')}
                   </button>
+                </div>
+              )}
+
+              {langMenuOpen && (
+                <div className="border-t border-gray-100 pt-2 mt-2">
+                  <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Select Language
+                  </div>
+                  <div className="max-h-60 overflow-y-auto">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          handleLanguageChange(lang.code);
+                          setMobileMenuOpen(false);
+                        }}
+                        className={`w-full text-left px-3 py-2 text-sm hover:bg-agri-50 transition-colors flex items-center justify-between ${
+                          language === lang.code ? 'bg-agri-50 text-agri-700 font-medium' : 'text-gray-700'
+                        }`}
+                      >
+                        <span>{lang.name}</span>
+                        {language === lang.code && (
+                          <span className="text-agri-600">✓</span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

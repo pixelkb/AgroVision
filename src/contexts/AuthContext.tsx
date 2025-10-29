@@ -1,17 +1,19 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
+type SupportedLanguage = 'en' | 'hi' | 'es' | 'fr' | 'de' | 'pt' | 'bn' | 'ta' | 'te' | 'mr' | 'pa' | 'gu';
+
 interface User {
   id: string;
   name: string;
   email: string;
   phone?: string;
-  preferredLanguage: 'en' | 'hi';
+  preferredLanguage: SupportedLanguage;
 }
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
-  signup: (name: string, email: string, phone: string, password: string, language: 'en' | 'hi') => Promise<boolean>;
+  signup: (name: string, email: string, phone: string, password: string, language: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -55,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signup = async (name: string, email: string, phone: string, password: string, language: 'en' | 'hi'): Promise<boolean> => {
+  const signup = async (name: string, email: string, phone: string, password: string, language: string): Promise<boolean> => {
     setIsLoading(true);
     try {
       // Simulate API call

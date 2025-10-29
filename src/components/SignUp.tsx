@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Loader2, Leaf } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Eye, EyeOff, Loader2, Leaf, Mic, MicOff } from 'lucide-react';
 import FarmIllustration from './FarmIllustration';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,15 +17,82 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
     email: string;
     phone: string;
     password: string;
-    language: 'en' | 'hi';
+    language: string;
   }>({
     name: '',
     email: '',
     phone: '',
     password: '',
-    language: language as 'en' | 'hi'
+    language: language
   });
   const [error, setError] = useState('');
+  const [voiceField, setVoiceField] = useState<string | null>(null);
+  const [isListening, setIsListening] = useState(false);
+  const [recognition, setRecognition] = useState<any>(null);
+
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const recognitionInstance = new SpeechRecognition();
+      recognitionInstance.continuous = false;
+      recognitionInstance.interimResults = false;
+      setRecognition(recognitionInstance);
+    }
+  }, []);
+
+  const getLanguageCode = (lang: string): string => {
+    const langMap: Record<string, string> = {
+      'en': 'en-US', 'hi': 'hi-IN', 'es': 'es-ES', 'fr': 'fr-FR',
+      'de': 'de-DE', 'pt': 'pt-PT', 'bn': 'bn-IN', 'ta': 'ta-IN',
+      'te': 'te-IN', 'mr': 'mr-IN', 'pa': 'pa-IN', 'gu': 'gu-IN'
+    };
+    return langMap[lang] || 'en-US';
+  };
+
+  const startVoiceInput = (fieldName: string) => {
+    if (!recognition) {
+      setError('Voice input not supported in this browser');
+      return;
+    }
+
+    setVoiceField(fieldName);
+    setIsListening(true);
+    recognition.lang = getLanguageCode(formData.language);
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setFormData(prev => ({ ...prev, [fieldName]: transcript }));
+      setIsListening(false);
+      setVoiceField(null);
+    };
+
+    recognition.onerror = () => {
+      setError('Voice recognition error. Please try again.');
+      setIsListening(false);
+      setVoiceField(null);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+      setVoiceField(null);
+    };
+
+    try {
+      recognition.start();
+    } catch (err) {
+      setError('Failed to start voice recognition');
+      setIsListening(false);
+      setVoiceField(null);
+    }
+  };
+
+  const stopVoiceInput = () => {
+    if (recognition && isListening) {
+      recognition.stop();
+      setIsListening(false);
+      setVoiceField(null);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,11 +108,11 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
       formData.email,
       formData.phone,
       formData.password,
-      formData.language as 'en' | 'hi'
+      formData.language
     );
     
     if (success) {
-      setLanguage(formData.language as 'en' | 'hi');
+      setLanguage(formData.language as any);
       setCurrentPage('home');
     } else {
       setError('Failed to create account. Email may already exist.');
@@ -82,32 +149,68 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                 {t('auth.name')}
               </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
-                placeholder="John Doe"
-              />
+              <div className="relative">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="appearance-none relative block w-full px-3 py-3 pr-12 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
+                  placeholder="John Doe"
+                />
+                {recognition && (
+                  <button
+                    type="button"
+                    onClick={() => isListening && voiceField === 'name' ? stopVoiceInput() : startVoiceInput('name')}
+                    className={`absolute inset-y-0 right-0 pr-3 flex items-center transition-colors ${
+                      isListening && voiceField === 'name' ? 'text-red-500 animate-pulse' : 'text-agri-600 hover:text-agri-700'
+                    }`}
+                    title={t('auth.voice.label')}
+                  >
+                    {isListening && voiceField === 'name' ? (
+                      <MicOff className="h-5 w-5" />
+                    ) : (
+                      <Mic className="h-5 w-5" />
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 {t('auth.email')}
               </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="appearance-none relative block w-full px-3 py-3 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
-                placeholder="john@example.com"
-              />
+              <div className="relative">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="appearance-none relative block w-full px-3 py-3 pr-12 border border-agri-200 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
+                  placeholder="john@example.com"
+                />
+                {recognition && (
+                  <button
+                    type="button"
+                    onClick={() => isListening && voiceField === 'email' ? stopVoiceInput() : startVoiceInput('email')}
+                    className={`absolute inset-y-0 right-0 pr-3 flex items-center transition-colors ${
+                      isListening && voiceField === 'email' ? 'text-red-500 animate-pulse' : 'text-agri-600 hover:text-agri-700'
+                    }`}
+                    title={t('auth.voice.label')}
+                  >
+                    {isListening && voiceField === 'email' ? (
+                      <MicOff className="h-5 w-5" />
+                    ) : (
+                      <Mic className="h-5 w-5" />
+                    )}
+                  </button>
+                )}
+              </div>
             </div>
 
             <div>
@@ -162,11 +265,21 @@ export default function SignUp({ setCurrentPage }: SignUpProps) {
                 id="language"
                 name="language"
                 value={formData.language}
-                onChange={(e) => setFormData({ ...formData, language: e.target.value as 'en' | 'hi' })}
+                onChange={(e) => setFormData({ ...formData, language: e.target.value })}
                 className="appearance-none relative block w-full px-3 py-3 border border-agri-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-agri-500 focus:border-agri-500 focus:z-10 sm:text-sm bg-white/80"
               >
-                <option value="en">{t('auth.english')}</option>
-                <option value="hi">{t('auth.hindi')}</option>
+                <option value="en">English</option>
+                <option value="hi">हिंदी (Hindi)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="pt">Português (Portuguese)</option>
+                <option value="bn">বাংলা (Bengali)</option>
+                <option value="ta">தமிழ் (Tamil)</option>
+                <option value="te">తెలుగు (Telugu)</option>
+                <option value="mr">मराठी (Marathi)</option>
+                <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                <option value="gu">ગુજરાતી (Gujarati)</option>
               </select>
             </div>
           </div>
